@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #faf8f2;
+  --color-paper-soft: #f3eee2;
+  --color-kraft: #e8dcc4;
+  --color-ink: #1a1a1a;
+  --color-walnut: #5a3a24;
+  --color-charcoal: #3f3f3f;
+  --color-ash: #6a6a6a;
+  --color-mute: #929292;
+  --color-stone: #c1c1c1;
+  --color-hairline: #e2dccc;
+  --color-son: #8b0000;
+  --color-son-deep: #6e0000;
+  --color-gold: #c9a86a;
+  --color-gold-deep: #a8884a;
+  --color-lake: #1b2a4e;
+  --color-kiln: #3a6b5a;
+
+  --font-display: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), -apple-system, system-ui, sans-serif;
+  --font-mono-label: var(--font-montserrat), -apple-system, system-ui, sans-serif;
+  --font-rounded: var(--font-baloo), "Trebuchet MS", -apple-system, system-ui, sans-serif;
+  --font-script: var(--font-dancing), "Segoe Script", "Brush Script MT", cursive;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.02) inset, 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-float:
+    0 0 0 1px rgba(0, 0, 0, 0.02),
+    0 2px 6px 0 rgba(0, 0, 0, 0.04),
+    0 4px 14px 0 rgba(0, 0, 0, 0.08);
+  --shadow-deep:
+    0 0 0 1px rgba(0, 0, 0, 0.02),
+    0 4px 16px 0 rgba(0, 0, 0, 0.08),
+    0 24px 48px -16px rgba(0, 0, 0, 0.18);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "salt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-lora), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Rounded warm wordmark — echoes the official "AN" logo */
+.font-rounded {
+  font-family: var(--font-rounded);
+  letter-spacing: -0.01em;
+}
+
+/* Warm red→orange gradient lifted from the AN logo, for the wordmark mark */
+.logo-gradient {
+  background: linear-gradient(135deg, #e5391f 0%, #f0612a 45%, #f59324 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.font-label {
+  font-family: var(--font-mono-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Brand hairline — used like Airbnb's #dddddd */
+.border-line {
+  border-color: rgba(90, 58, 36, 0.18);
+}
+
+/* Painterly underline used under section labels */
+.brush-rule::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--color-gold);
+  margin-top: 12px;
+}
+
+.brush-rule-center::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 1.5px;
+  background: var(--color-gold);
+  margin: 12px auto 0;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-son);
+  color: #fff;
+}
+
+/* Keyboard focus ring — Airbnb's 2px ink focus ring, brand-tinted */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Tactile press feedback on primary actions — gentle lift on hover, scale on press */
+.press {
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (hover: hover) {
+  .press:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 20px -8px rgba(139, 0, 0, 0.45);
+  }
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/* Arrow that nudges forward on hover — for "emotion" on text/link CTAs */
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.group:hover .cta-arrow {
+  transform: translateX(3px);
+}

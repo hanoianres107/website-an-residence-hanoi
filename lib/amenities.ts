@@ -1,0 +1,30 @@
+export const AMENITIES: Record<string, { vi: string; en: string; icon: string }> = {
+  lakeView: { vi: "View Hồ Ba Mẫu", en: "Ba Mau Lake view", icon: "lake" },
+  treeBalcony: { vi: "Ban công cây xanh", en: "Tree-shaded balcony", icon: "tree" },
+  gardenView: { vi: "View sân vườn", en: "Garden view", icon: "tree" },
+  outdoorBath: { vi: "Bồn tắm ngoài trời", en: "Outdoor soaking tub", icon: "tub" },
+  balcony: { vi: "Ban công riêng", en: "Private balcony", icon: "balcony" },
+  bathtub: { vi: "Bồn tắm trong nhà", en: "Indoor bathtub", icon: "tub" },
+  kitchen: { vi: "Bếp đầy đủ", en: "Full kitchen", icon: "kitchen" },
+  fullKitchen: { vi: "Bếp gia đình lớn", en: "Family-size kitchen", icon: "kitchen" },
+  kitchenette: { vi: "Bếp nhỏ tiện nghi", en: "Compact kitchenette", icon: "kitchen" },
+  kingBed: { vi: "Giường King", en: "King bed", icon: "bed" },
+  twoBed: { vi: "Hai phòng ngủ", en: "Two bedrooms", icon: "bed" },
+  diningFour: { vi: "Bàn ăn 4 người", en: "Dining for four", icon: "dining" },
+  diningSix: { vi: "Bàn ăn 6 người", en: "Dining for six", icon: "dining" },
+  workspace: { vi: "Bàn làm việc", en: "Dedicated workspace", icon: "desk" },
+  wifi: { vi: "WiFi tốc độ cao", en: "Fast WiFi", icon: "wifi" },
+};
+
+export const COMMON_AMENITIES: Record<string, { vi: string; en: string; icon: string }> = {
+  ac: { vi: "Điều hòa Daikin từng phòng", en: "Daikin AC in every room", icon: "ac" },
+  smart: { vi: "Smart TV · Apple TV · Netflix", en: "Smart TV · Apple TV · Netflix", icon: "tv" },
+  bosch: { vi: "Máy rửa bát Bosch", en: "Bosch dishwasher", icon: "dishwasher" },
+  laundry: { vi: "Máy giặt sấy Siemens", en: "Siemens washer-dryer", icon: "laundry" },
+  toiletries: { vi: "Đồ tắm Indochine signature", en: "Indochine signature toiletries", icon: "toiletries" },
+  espresso: { vi: "Máy pha espresso WMF", en: "WMF espresso machine", icon: "coffee" },
+  safe: { vi: "Két sắt riêng", en: "In-room safe", icon: "safe" },
+  reception: { vi: "Lễ tân 24/7", en: "24/7 reception", icon: "reception" },
+  gym: { vi: "Gym & yoga studio", en: "Gym & yoga studio", icon: "gym" },
+  lobby: { vi: "Lobby sơn mài thủ công", en: "Hand-lacquered lobby gallery", icon: "lobby" },
+};
