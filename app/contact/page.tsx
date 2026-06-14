@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useLang } from "@/lib/lang";
 import { SectionLabel } from "@/components/SectionLabel";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function ContactPage() {
   const { t, lang } = useLang();
@@ -65,27 +66,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form card */}
-          <form
-            className="rounded-3xl border border-hairline bg-paper p-8 space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert(lang === "vi" ? "Cảm ơn — AN sẽ gọi lại trong 30 phút." : "Thank you — AN will call you back within 30 minutes.");
-            }}
-          >
-            <SectionLabel>{t.contact.formTitle}</SectionLabel>
-            <div className="grid sm:grid-cols-2 gap-4 mt-4">
-              <Field label={t.contact.formName} name="name" />
-              <Field label={t.contact.formContact} name="contact" />
-            </div>
-            <Field label={t.contact.formMessage} name="message" multiline />
-            <button
-              type="submit"
-              className="mt-2 w-full inline-flex items-center justify-center rounded-full bg-son px-6 py-3.5 text-sm font-label text-paper hover:bg-son-deep transition"
-            >
-              {t.contact.formCta}
-            </button>
-            <p className="text-xs text-ash text-center">{t.contact.formNote}</p>
-          </form>
+          <ContactForm />
         </div>
       </section>
 
@@ -136,20 +117,6 @@ function ContactRow({
     </a>
   ) : (
     Content
-  );
-}
-
-function Field({ label, name, multiline = false }: { label: string; name: string; multiline?: boolean }) {
-  const baseCls = "w-full bg-paper rounded-xl border border-hairline px-4 py-3 text-sm text-ink placeholder:text-ash focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10";
-  return (
-    <label className="block">
-      <span className="font-label text-[10px] text-ash">{label}</span>
-      {multiline ? (
-        <textarea name={name} rows={4} className={baseCls + " mt-1.5"} />
-      ) : (
-        <input name={name} type="text" className={baseCls + " mt-1.5"} />
-      )}
-    </label>
   );
 }
 

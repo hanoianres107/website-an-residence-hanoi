@@ -13,13 +13,11 @@ export function Nav() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/apartments", label: t.nav.apartments },
-    { href: "/long-stay", label: t.nav.longStay },
-    { href: "/offers", label: t.nav.offers },
-    { href: "/experiences", label: t.nav.experiences },
-    { href: "/gallery", label: t.nav.gallery },
-    { href: "/blog", label: t.nav.journal },
     { href: "/about", label: t.nav.about },
+    { href: "/apartments", label: t.nav.apartments },
+    { href: "/gallery", label: t.nav.gallery },
+    { href: "/experiences", label: t.nav.experiences },
+    { href: "/blog", label: t.nav.journal },
   ];
 
   const isActive = (href: string) =>
@@ -32,7 +30,7 @@ export function Nav() {
           <Logo />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-7">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -49,14 +47,14 @@ export function Nav() {
         <div className="flex items-center gap-3">
           <LanguageToggle />
           <Link
-            href="/contact"
+            href="/#book"
             className="press hidden sm:inline-flex items-center rounded-full bg-son px-4 py-2 text-xs font-label text-paper hover:bg-son-deep"
           >
             {t.nav.bookNow}
           </Link>
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink"
+            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink"
             aria-label="Toggle menu"
             aria-expanded={open}
           >
@@ -67,7 +65,7 @@ export function Nav() {
         </div>
       </div>
       {open && (
-        <div className="lg:hidden border-t border-hairline bg-paper">
+        <div className="md:hidden border-t border-hairline bg-paper">
           <div className="mx-auto max-w-[1320px] px-6 py-4 flex flex-col gap-3.5">
             {links.map((link) => (
               <Link
@@ -82,7 +80,7 @@ export function Nav() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/#book"
               onClick={() => setOpen(false)}
               className="press mt-1 inline-flex w-fit items-center rounded-full bg-son px-5 py-2.5 text-xs font-label text-paper"
             >

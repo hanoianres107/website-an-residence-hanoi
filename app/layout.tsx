@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, Inter, Montserrat, Baloo_2, Dancing_Script } from "next/font/google";
+import { Lora, Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/lang";
 import { Nav } from "@/components/Nav";
@@ -14,27 +14,11 @@ const lora = Lora({
   display: "swap",
 });
 
-// Body — neutral, reliable, full Vietnamese diacritics
+// Body, labels, buttons & logo — one sans for the whole system, full Vietnamese diacritics
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-// Uppercase labels / eyebrows
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-// Rounded warm wordmark — echoes the actual "AN" logo letterforms (heavy weights only)
-const baloo = Baloo_2({
-  variable: "--font-baloo",
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  weight: ["700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -125,7 +109,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${lora.variable} ${inter.variable} ${montserrat.variable} ${baloo.variable} ${dancing.variable} h-full antialiased`}
+      className={`${lora.variable} ${inter.variable} ${dancing.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <script

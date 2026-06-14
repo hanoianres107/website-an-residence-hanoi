@@ -1,11 +1,8 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-baseline gap-2 ${className}`}>
-      <span className="font-rounded logo-gradient text-[28px] font-extrabold leading-none">
+    <div className={`flex items-baseline ${className}`}>
+      <span className="font-rounded logo-gradient text-[30px] font-extrabold leading-none tracking-tight">
         AN
-      </span>
-      <span className="font-label text-[10px] text-walnut leading-none pb-[3px] tracking-[0.22em]">
-        RESIDENCE
       </span>
     </div>
   );

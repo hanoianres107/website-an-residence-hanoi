@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLang } from "@/lib/lang";
 import { SectionLabel } from "@/components/SectionLabel";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function AboutPage() {
   const { lang, t } = useLang();
@@ -110,6 +111,24 @@ export default function AboutPage() {
               {lang === "vi" ? "Liên hệ AN" : "Get in touch"}
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Contact form */}
+      <section className="bg-paper-soft">
+        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20 grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:items-center">
+          <div>
+            <SectionLabel>{t.contact.heroEyebrow}</SectionLabel>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink leading-tight">
+              {t.contact.heroTitle}
+            </h2>
+            <p className="mt-5 max-w-md text-walnut leading-relaxed">{t.contact.heroLead}</p>
+            <div className="mt-7 space-y-2.5 text-sm">
+              <a href="tel:+84905991979" className="block text-ink hover:text-son">+84 905 991 979 · Zalo · WhatsApp</a>
+              <a href="mailto:anresidence107h3m@gmail.com" className="block text-ink hover:text-son">anresidence107h3m@gmail.com</a>
+            </div>
+          </div>
+          <ContactForm />
         </div>
       </section>
     </>

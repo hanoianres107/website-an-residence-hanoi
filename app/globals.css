@@ -21,8 +21,8 @@
   --font-display: var(--font-lora), Georgia, "Times New Roman", serif;
   --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), -apple-system, system-ui, sans-serif;
-  --font-mono-label: var(--font-montserrat), -apple-system, system-ui, sans-serif;
-  --font-rounded: var(--font-baloo), "Trebuchet MS", -apple-system, system-ui, sans-serif;
+  --font-mono-label: var(--font-inter), -apple-system, system-ui, sans-serif;
+  --font-rounded: var(--font-inter), -apple-system, system-ui, sans-serif;
   --font-script: var(--font-dancing), "Segoe Script", "Brush Script MT", cursive;
 
   --radius-sm: 6px;
