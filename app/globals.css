@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
+/* Eden-style system (same structure as catbaoutdoors.vn/stays/the-eden-cat-ba):
+   white canvas, neutral greys, Inter only — with AN's own accents (son red + gold). */
 @theme inline {
-  --color-paper: #faf8f2;
-  --color-paper-soft: #f3eee2;
-  --color-kraft: #e8dcc4;
+  --color-paper: #ffffff;
+  --color-paper-soft: #f7f7f7;
+  --color-kraft: #ebebeb;
   --color-ink: #1a1a1a;
-  --color-walnut: #5a3a24;
+  --color-walnut: #484848;
   --color-charcoal: #3f3f3f;
   --color-ash: #6a6a6a;
   --color-mute: #929292;
   --color-stone: #c1c1c1;
-  --color-hairline: #e2dccc;
+  --color-hairline: #dddddd;
   --color-son: #8b0000;
   --color-son-deep: #6e0000;
   --color-gold: #c9a86a;
@@ -18,12 +20,10 @@
   --color-lake: #1b2a4e;
   --color-kiln: #3a6b5a;
 
-  --font-display: var(--font-lora), Georgia, "Times New Roman", serif;
-  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-inter), -apple-system, system-ui, sans-serif;
   --font-sans: var(--font-inter), -apple-system, system-ui, sans-serif;
   --font-mono-label: var(--font-inter), -apple-system, system-ui, sans-serif;
   --font-rounded: var(--font-inter), -apple-system, system-ui, sans-serif;
-  --font-script: var(--font-dancing), "Segoe Script", "Brush Script MT", cursive;
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -51,21 +51,31 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "salt";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* Legacy heading class on the secondary pages — now the same bold Inter as Eden */
 .font-display {
-  font-family: var(--font-lora), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
-.font-script {
-  font-family: var(--font-script);
-}
-
-/* Rounded warm wordmark — echoes the official "AN" logo */
 .font-rounded {
   font-family: var(--font-rounded);
   letter-spacing: -0.01em;
@@ -85,12 +95,19 @@ body {
   text-transform: uppercase;
 }
 
-/* Brand hairline — used like Airbnb's #dddddd */
 .border-line {
-  border-color: rgba(90, 58, 36, 0.18);
+  border-color: var(--color-hairline);
 }
 
-/* Painterly underline used under section labels */
+/* Airbnb-style 3-layer elevation for the sticky booking panel (same as Eden) */
+.elevation-card {
+  box-shadow:
+    rgba(0, 0, 0, 0.02) 0 0 0 1px,
+    rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+    rgba(0, 0, 0, 0.1) 0 4px 8px 0;
+}
+
+/* Small gold rule under section labels */
 .brush-rule::after {
   content: "";
   display: block;
@@ -109,18 +126,15 @@ body {
   margin: 12px auto 0;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection */
 ::selection {
   background: var(--color-son);
   color: #fff;
 }
 
-/* Keyboard focus ring — Airbnb's 2px ink focus ring, brand-tinted */
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
@@ -146,7 +160,6 @@ button:focus-visible,
   transform: scale(0.97);
 }
 
-/* Arrow that nudges forward on hover — for "emotion" on text/link CTAs */
 .cta-arrow {
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);

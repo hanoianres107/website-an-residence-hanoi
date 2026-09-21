@@ -22,7 +22,7 @@ export default function AboutPage() {
             <p className="mt-6 max-w-xl text-lg text-walnut leading-relaxed">
               {t.about.heroLead}
             </p>
-            <p className="mt-6 font-script text-4xl text-son">{t.brandTag}</p>
+            <p className="mt-6 text-2xl font-semibold text-son">{t.brandTag}</p>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
             <Image src="/photos/lobby-2.jpg" alt="" fill sizes="(max-width:1024px) 100vw, 45vw" className="object-cover" priority />

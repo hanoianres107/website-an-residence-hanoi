@@ -9,8 +9,6 @@ export type Apartment = {
   sizeSqm: number;
   bedrooms: number;
   bathrooms: number;
-  maxGuests: number;
-  rate: number;
   amenityKeys: string[];
   storyVi: string;
   storyEn: string;
@@ -19,12 +17,6 @@ export type Apartment = {
 };
 
 export const TIER_ORDER: Tier[] = ["studio", "deluxe", "family"];
-
-export const TIER_DEFAULT_RATE: Record<Tier, number> = {
-  studio: 1850000,
-  deluxe: 2950000,
-  family: 5200000,
-};
 
 export const APARTMENTS: Apartment[] = [
   {
@@ -36,8 +28,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 85,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 3200000,
     amenityKeys: ["lakeView", "outdoorBath", "balcony", "kitchen", "kingBed", "bathtub", "workspace", "wifi"],
     storyVi:
       "Căn duy nhất ở AN có bồn tắm ngoài trời nhìn thẳng ra Hồ Ba Mẫu. Sàn gỗ óc chó, tường son mài đỏ, một góc đọc sách ngay bên cửa sổ. Hoàng hôn từ ban công là khoảnh khắc khách hay viết review nhất.",
@@ -55,8 +45,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 125,
     bedrooms: 2,
     bathrooms: 2,
-    maxGuests: 5,
-    rate: 6200000,
     amenityKeys: ["lakeView", "fullKitchen", "twoBed", "balcony", "diningSix", "bathtub", "workspace", "wifi"],
     storyVi:
       "Căn lớn nhất AN — 125m² cho gia đình ba thế hệ. Phòng khách kéo dài bằng cả tầng nhà phố. Bàn ăn sáu chỗ, bếp đủ nấu một bữa Hà Nội. Hai phòng ngủ — một king, một twin — đều mở ra ban công riêng.",
@@ -74,8 +62,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 70,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 2100000,
     amenityKeys: ["lakeView", "kitchenette", "balcony", "kingBed", "bathtub", "workspace", "wifi"],
     storyVi:
       "Tầng cao nhất AN — căn 70m² lặng nhất tòa. Trần cao, cửa sổ kéo từ sàn lên trần, view ngắm hồ và một mảnh trời. Đến đây để ngủ thật ngon.",
@@ -93,8 +79,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 85,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 3000000,
     amenityKeys: ["lakeView", "balcony", "kitchen", "kingBed", "bathtub", "workspace", "wifi"],
     storyVi:
       "Căn signature của AN — chuồn chuồn son đỏ vẽ tay trên tường đầu giường. Sàn gạch An Nam quatrefoil, đèn mây Bát Tràng, bồn tắm soaking ngả về phía cửa sổ.",
@@ -112,8 +96,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 120,
     bedrooms: 2,
     bathrooms: 2,
-    maxGuests: 5,
-    rate: 5800000,
     amenityKeys: ["lakeView", "fullKitchen", "twoBed", "balcony", "diningSix", "bathtub", "wifi"],
     storyVi:
       "Căn family signature — bàn ăn gỗ óc chó dài 2m6, bếp đảo trung tâm, mảng tường son mài chạy dọc phòng khách. Là căn được các gia đình ba thế hệ chọn nhiều nhất.",
@@ -131,8 +113,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 70,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 1950000,
     amenityKeys: ["lakeView", "kitchenette", "balcony", "kingBed", "bathtub", "wifi"],
     storyVi:
       "Studio 70m² tầng năm — view hồ và mặt phố Ô Đồng Lầm. Tone gỗ ngả nâu, một góc bàn làm việc, một bình trà.",
@@ -150,8 +130,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 85,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 2850000,
     amenityKeys: ["treeBalcony", "kitchen", "kingBed", "bathtub", "workspace", "wifi"],
     storyVi:
       "Ban công của AN. 401 nhìn vào tán bằng lăng — mùa hạ tím rượi, mùa thu rụng vàng. Vật liệu mộc: tre, gỗ thông tự nhiên, vải lanh.",
@@ -169,8 +147,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 102,
     bedrooms: 2,
     bathrooms: 2,
-    maxGuests: 4,
-    rate: 5400000,
     amenityKeys: ["fullKitchen", "twoBed", "balcony", "diningFour", "bathtub", "wifi"],
     storyVi:
       "Pha trộn rõ nét nhất tinh thần Đông Dương: cửa chớp gỗ, sàn gạch họa tiết, đèn đồng. Hai phòng ngủ đối xứng qua phòng khách trung tâm.",
@@ -188,8 +164,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 70,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 1850000,
     amenityKeys: ["kitchenette", "balcony", "kingBed", "bathtub", "wifi"],
     storyVi: "Studio 70m² yên tĩnh tầng tư — phù hợp khách công tác dài ngày.",
     storyEn: "A quiet 70m² studio on the fourth floor — ideal for longer business stays.",
@@ -205,8 +179,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 85,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 2800000,
     amenityKeys: ["kitchen", "kingBed", "bathtub", "workspace", "wifi"],
     storyVi: "Minimalist Indochine — bớt một, bớt hai. Tường trắng, ván sàn ngả nâu, một bức tranh sơn mài duy nhất.",
     storyEn: "Minimalist Indochine — subtract once, subtract twice. White walls, walnut floor, a single lacquer panel.",
@@ -222,8 +194,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 102,
     bedrooms: 2,
     bathrooms: 2,
-    maxGuests: 4,
-    rate: 5200000,
     amenityKeys: ["fullKitchen", "twoBed", "balcony", "diningFour", "bathtub", "wifi"],
     storyVi: "Căn family bán chạy nhất theo mùa — bếp đủ dùng cho 4 người, bàn ăn 4 chỗ, phòng khách nhỏ ấm cúng.",
     storyEn: "A bestselling family unit — a kitchen for four, a 4-seat dining table, a cozy living room.",
@@ -239,8 +209,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 70,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 1800000,
     amenityKeys: ["kitchenette", "balcony", "kingBed", "bathtub", "wifi"],
     storyVi: "Studio tầng ba — vừa đủ riêng tư, vừa đủ tiện đi xuống lobby.",
     storyEn: "A third-floor studio — private enough, near enough to the lobby.",
@@ -256,8 +224,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 85,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 2700000,
     amenityKeys: ["gardenView", "kitchen", "kingBed", "bathtub", "wifi"],
     storyVi: "Ban công nhìn vào sân vườn nội bộ — buổi sáng chim hót, không tiếng còi xe.",
     storyEn: "A balcony onto the inner garden — birdsong in the morning, no street horns.",
@@ -273,8 +239,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 102,
     bedrooms: 2,
     bathrooms: 2,
-    maxGuests: 4,
-    rate: 5100000,
     amenityKeys: ["fullKitchen", "twoBed", "balcony", "diningFour", "bathtub", "wifi"],
     storyVi: "Family suite tầng hai — tiện cho ông bà không phải đi thang máy nhiều. Hai phòng ngủ riêng, phòng khách rộng.",
     storyEn: "A second-floor family suite — easy for grandparents who'd rather not ride the elevator twice. Two private bedrooms, a generous living room.",
@@ -290,8 +254,6 @@ export const APARTMENTS: Apartment[] = [
     sizeSqm: 70,
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    rate: 2000000,
     amenityKeys: ["kitchenette", "balcony", "kingBed", "bathtub", "wifi"],
     storyVi:
       "Cảm hứng Nhật — tone trầm, tatami corner, ánh đèn vàng dịu. Studio để ngồi yên đọc sách.",

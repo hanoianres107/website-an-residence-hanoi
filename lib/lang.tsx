@@ -12,11 +12,15 @@ type LangContextValue = {
 const LangContext = createContext<LangContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("vi");
+  // English is the default; a visitor's own VI/EN choice is remembered.
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     const stored = (typeof window !== "undefined" && window.localStorage.getItem("an-lang")) as Lang | null;
-    if (stored === "vi" || stored === "en") setLangState(stored);
+    if (stored === "vi" || stored === "en") {
+      setLangState(stored);
+      document.documentElement.lang = stored;
+    }
   }, []);
 
   const setLang = (l: Lang) => {

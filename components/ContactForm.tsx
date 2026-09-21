@@ -31,25 +31,25 @@ export function ContactForm({ className = "" }: { className?: string }) {
     "w-full bg-paper rounded-xl border border-hairline px-4 py-3 text-sm text-ink placeholder:text-ash focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10";
 
   return (
-    <form onSubmit={onSubmit} className={`rounded-3xl border border-hairline bg-paper p-8 space-y-4 ${className}`}>
+    <form onSubmit={onSubmit} className={`rounded-[20px] border border-hairline bg-paper p-6 sm:p-8 space-y-4 ${className}`}>
       <SectionLabel>{t.contact.formTitle}</SectionLabel>
       <div className="grid sm:grid-cols-2 gap-4 mt-4">
         <label className="block">
-          <span className="font-label text-[10px] text-ash">{t.contact.formName}</span>
+          <span className="text-xs font-semibold text-ash">{t.contact.formName}</span>
           <input value={name} onChange={(e) => setName(e.target.value)} type="text" className={fieldCls + " mt-1.5"} />
         </label>
         <label className="block">
-          <span className="font-label text-[10px] text-ash">{t.contact.formContact}</span>
+          <span className="text-xs font-semibold text-ash">{t.contact.formContact}</span>
           <input value={contact} onChange={(e) => setContact(e.target.value)} type="text" className={fieldCls + " mt-1.5"} />
         </label>
       </div>
       <label className="block">
-        <span className="font-label text-[10px] text-ash">{t.contact.formMessage}</span>
+        <span className="text-xs font-semibold text-ash">{t.contact.formMessage}</span>
         <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4} className={fieldCls + " mt-1.5"} />
       </label>
       <button
         type="submit"
-        className="press group mt-2 w-full inline-flex items-center justify-center gap-2 rounded-full bg-son px-6 py-3.5 text-sm font-label text-paper hover:bg-son-deep"
+        className="group mt-2 w-full inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-black"
       >
         {t.contact.formCta}
         <span className="cta-arrow">→</span>
@@ -58,7 +58,7 @@ export function ContactForm({ className = "" }: { className?: string }) {
         {sent ? (lang === "vi" ? "Đang mở WhatsApp… nếu chưa, anh/chị gửi qua email giúp em." : "Opening WhatsApp… if it didn't, please email us.") : t.contact.formNote}
       </p>
       <p className="text-center">
-        <a href={`mailto:${EMAIL}`} className="font-label text-[11px] text-son hover:text-son-deep">
+        <a href={`mailto:${EMAIL}`} className="text-xs font-semibold text-ash hover:text-ink">
           {lang === "vi" ? "hoặc email " : "or email "} {EMAIL}
         </a>
       </p>

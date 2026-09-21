@@ -2,234 +2,194 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useLang } from "@/lib/lang";
-import { RatingLockup } from "@/components/RatingLockup";
-import { TierPicker } from "@/components/TierPicker";
-import { FeaturedGrid } from "@/components/FeaturedGrid";
-import { SectionLabel } from "@/components/SectionLabel";
-import { BookingWidget } from "@/components/BookingWidget";
+import { GALLERY } from "@/lib/gallery";
+import { LOWEST_RATE, formatVnd } from "@/lib/roomTypes";
+import { StayGallery, type GalleryImg } from "@/components/StayGallery";
+import { RoomsGrid } from "@/components/RoomsGrid";
+import { BookingWidget, type RoomChoice } from "@/components/BookingWidget";
 import { ContactForm } from "@/components/ContactForm";
+
+// First five fill the gallery grid; the lightbox continues through every photo on the site.
+const FEATURED: GalleryImg[] = [
+  { src: "/photos/AN-601-2.jpg", alt: "Ba Mau Lake seen from an AN Residence balcony" },
+  { src: "/photos/lobby-1.jpg", alt: "AN Residence lounge" },
+  { src: "/photos/AN-502-2.jpg", alt: "Living and dining room, Two-Bedroom Deluxe Apartment" },
+  { src: "/photos/rooftop-3.jpg", alt: "Kitchen at AN Residence" },
+  { src: "/photos/AN-401-1.jpg", alt: "Junior Suite with a hand-painted mural" },
+];
+const PHOTOS: GalleryImg[] = [
+  ...FEATURED,
+  ...GALLERY.filter((g) => !FEATURED.some((f) => f.src === g.src)).map(({ src, alt }) => ({ src, alt })),
+];
+
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Hanoi%20AN%20Residence%2C%20107%20%C3%94%20%C4%90%E1%BB%93ng%20L%E1%BA%A7m%2C%20H%C3%A0%20N%E1%BB%99i";
+const MAP_EMBED =
+  "https://www.google.com/maps?q=107+%C3%94+%C4%90%E1%BB%93ng+L%E1%BA%A7m,+%C4%90%E1%BB%91ng+%C4%90a,+H%C3%A0+N%E1%BB%99i&output=embed";
+
+const BTN_SECONDARY =
+  "inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-hairline bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink";
 
 export default function Home() {
   const { lang, t } = useLang();
+  const h = t.home;
+  const [room, setRoom] = useState<RoomChoice>("any");
+
+  const facts = [
+    { k: h.factFrom, v: `${formatVnd(LOWEST_RATE, lang)} ${h.perNight}`, strong: true },
+    { k: h.factType, v: h.factTypeValue },
+    { k: h.factLocation, v: h.factLocationValue },
+    { k: h.factCapacity, v: h.factCapacityValue },
+    { k: h.factCheck, v: h.factCheckValue },
+  ];
 
   return (
-    <>
-      {/* Hero — full-bleed photograph with overlaid quiet label */}
-      <section className="relative">
-        <div className="relative h-[88svh] min-h-[560px] w-full overflow-hidden">
-          <Image
-            src="/photos/lobby-1.jpg"
-            alt="AN Residence — lobby"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/55" />
-          <div className="absolute inset-0 flex flex-col">
-            <div className="flex-1" />
-            <div className="mx-auto w-full max-w-[1320px] px-6 lg:px-10 pb-14 text-paper">
-              <div className="font-label text-[11px] tracking-[0.32em] text-paper/80">
-                {t.home.heroEyebrow}
-              </div>
-              <h1 className="mt-4 font-script text-[72px] sm:text-[120px] leading-[0.95] text-paper">
-                {t.home.heroTitle}
-              </h1>
-              <p className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-paper/95">
-                {t.home.heroSub}
-              </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/apartments"
-                  className="press group inline-flex items-center gap-2 rounded-full bg-son px-6 py-3 text-sm font-label text-paper hover:bg-son-deep"
-                >
-                  {t.home.heroCta}
-                  <span className="cta-arrow">→</span>
-                </Link>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center rounded-full border border-paper/60 bg-paper/10 px-6 py-3 text-sm font-label text-paper hover:bg-paper/20 backdrop-blur transition"
-                >
-                  {t.home.heroSecondary}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Booking availability widget — Airbnb-style, just below the hero */}
-      <section className="relative z-20 bg-paper">
-        <div className="mx-auto max-w-[1180px] px-6 lg:px-10 pt-10">
-          <BookingWidget />
-        </div>
-      </section>
-
-      {/* Rating lockup — Airbnb Guest Favorite analogue */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20">
-          <RatingLockup />
-        </div>
-      </section>
-
-      {/* Three tiers */}
-      <section className="bg-paper-soft">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20">
-          <div className="grid md:grid-cols-[1fr_auto] md:items-end gap-6 mb-10">
-            <div>
-              <SectionLabel>{t.home.tierEyebrow}</SectionLabel>
-              <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink max-w-xl leading-tight">
-                {t.home.tierTitle}
-              </h2>
-              <p className="mt-3 max-w-xl text-ash">{t.home.tierIntro}</p>
-            </div>
-            <Link href="/apartments" className="font-label text-[11px] text-son hover:text-son-deep">
-              {lang === "vi" ? "Tất cả 15 căn →" : "All 15 apartments →"}
-            </Link>
-          </div>
-          <TierPicker />
-        </div>
-      </section>
-
-      {/* Featured grid */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20">
-          <div className="flex items-end justify-between gap-6 mb-10">
-            <div>
-              <SectionLabel>{lang === "vi" ? "Một vài căn nổi bật" : "A few favorites"}</SectionLabel>
-              <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink max-w-xl leading-tight">
-                {lang === "vi" ? "Sáu cánh cửa AN mở ra điều gì." : "Six AN doors and what's behind each."}
-              </h2>
-            </div>
-          </div>
-          <FeaturedGrid />
-        </div>
-      </section>
-
-      {/* Hanoi Soul */}
-      <section className="bg-paper-soft">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-            <Image
-              src="/photos/exterior-1.jpg"
-              alt="Ba Mau Lake exterior"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <SectionLabel>{t.home.soulEyebrow}</SectionLabel>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink leading-tight">
-              {t.home.soulTitle}
-            </h2>
-            <p className="mt-5 text-walnut leading-relaxed">{t.home.soulBody}</p>
-            <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-4 max-w-md">
-              {t.home.soulFacts.map((f) => (
-                <div key={f.k} className="border-t border-line pt-3">
-                  <dt className="font-label text-[10px] text-ash">{f.k}</dt>
-                  <dd className="text-base text-ink mt-1">{f.v}</dd>
-                </div>
-              ))}
-            </dl>
+    <article>
+      {/* Hero — photo, eyebrow, name, tagline, two actions (Eden layout) */}
+      <section className="relative h-[70vh] min-h-[440px] max-h-[720px] w-full overflow-hidden bg-ink">
+        <Image src="/photos/AN-501-1.jpg" alt="Junior Suite at Hanoi AN Residence" fill preload sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/15" />
+        <div className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col justify-end px-6 pb-10 sm:pb-14 lg:px-10">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-paper/90 sm:text-sm">{h.heroEyebrow}</p>
+          <h1 className="mt-3 text-4xl font-bold leading-tight text-paper sm:text-5xl lg:text-6xl">{h.heroTitle}</h1>
+          <p className="mt-3 max-w-2xl text-base text-paper/90 sm:text-lg">{h.heroSub}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://maps.google.com/?q=107+%C3%94+%C4%90%E1%BB%93ng+L%E1%BA%A7m+Hanoi"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center mt-7 text-sm font-label text-son hover:text-son-deep"
+              href="#rooms"
+              className="inline-flex items-center rounded-full bg-son px-6 py-3 font-semibold text-paper transition-colors hover:bg-son-deep"
             >
-              {t.home.locationCta} →
+              {h.heroCta}
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-full border border-paper/70 bg-paper/15 px-6 py-3 font-semibold text-paper backdrop-blur-sm transition-colors hover:bg-paper/25"
+            >
+              {h.heroSecondary}
             </a>
           </div>
         </div>
       </section>
 
-      {/* 4 pillars */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20">
-          <div className="text-center max-w-2xl mx-auto">
-            <SectionLabel center>{t.home.pillarsEyebrow}</SectionLabel>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink leading-tight">
-              {t.home.pillarsTitle}
-            </h2>
-          </div>
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {t.home.pillarsList.map((p, i) => (
-              <div key={p.title} className="text-center sm:text-left">
-                <div className="font-label text-[10px] text-gold-deep">0{i + 1}</div>
-                <h3 className="mt-2 font-display text-2xl text-ink">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-walnut">{p.body}</p>
-              </div>
+      <section className="mx-auto max-w-[1280px] px-6 pt-8 lg:px-10">
+        <StayGallery images={PHOTOS} />
+      </section>
+
+      {/* About the building + sticky booking card */}
+      <section className="mx-auto mt-12 grid max-w-[1280px] grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:px-10">
+        <div className="space-y-10 lg:col-span-7">
+          <div className="flex flex-wrap gap-2 text-sm">
+            {h.chips.map((c) => (
+              <span key={c} className="rounded-full border border-hairline px-2.5 py-1 text-ash">
+                {c}
+              </span>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Long-stay teaser */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
-            <SectionLabel>{t.longStay.heroEyebrow}</SectionLabel>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink leading-tight">
-              {t.longStay.heroTitle}
-            </h2>
-            <p className="mt-5 max-w-xl text-walnut leading-relaxed">{t.longStay.heroLead}</p>
-            <Link
-              href="/long-stay"
-              className="press group mt-7 inline-flex items-center gap-2 rounded-full border border-son/30 bg-paper px-6 py-3 text-sm font-label text-son hover:bg-son hover:text-paper"
-            >
-              {lang === "vi" ? "Tìm hiểu ở dài ngày" : "Explore long stays"}
-              <span className="cta-arrow">→</span>
-            </Link>
+          <div className="space-y-4 text-[17px] leading-relaxed">
+            {h.about.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </div>
-          <div className="relative order-1 lg:order-2 aspect-[4/3] overflow-hidden rounded-3xl">
-            <Image
-              src="/photos/AN-602-2.jpg"
-              alt="Long-stay living space"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </section>
 
-      {/* Contact form — near the bottom of home */}
-      <section id="contact" className="bg-paper scroll-mt-24">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 py-20 grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:items-center">
-          <div>
-            <SectionLabel>{t.contact.heroEyebrow}</SectionLabel>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-ink leading-tight">
-              {t.contact.heroTitle}
-            </h2>
-            <p className="mt-5 max-w-md text-walnut leading-relaxed">{t.contact.heroLead}</p>
-            <div className="mt-7 space-y-2.5 text-sm">
-              <a href="tel:+84905991979" className="block text-ink hover:text-son">+84 905 991 979 · Zalo · WhatsApp</a>
-              <a href="mailto:anresidence107h3m@gmail.com" className="block text-ink hover:text-son">anresidence107h3m@gmail.com</a>
-              <p className="text-ash">107 Ô Đồng Lầm, Đống Đa, Hà Nội</p>
+          <div className="border-t border-hairline pt-8">
+            <h2 className="text-2xl font-bold tracking-tight">{h.highlightsTitle}</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {h.highlights.map((x) => (
+                <li key={x} className="flex gap-3 text-[15px]">
+                  <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold" />
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="border-t border-hairline pt-8">
+            <h2 className="text-2xl font-bold tracking-tight">{h.amenitiesTitle}</h2>
+            <div className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+              {h.amenities.map((a) => (
+                <div key={a} className="flex gap-3 text-[15px]">
+                  <span className="text-gold-deep">✓</span>
+                  <span>{a}</span>
+                </div>
+              ))}
             </div>
           </div>
-          <ContactForm />
         </div>
+
+        <aside className="lg:col-span-5">
+          <div id="book" className="scroll-mt-24 lg:sticky lg:top-24">
+            <div className="elevation-card rounded-[20px] border border-hairline bg-paper p-6">
+              <div className="text-2xl font-bold">{h.bookTitle}</div>
+              <p className="mt-2 text-sm text-ash">{h.bookLead}</p>
+              <BookingWidget room={room} onRoomChange={setRoom} />
+              <div className="mt-6 space-y-2 border-t border-hairline pt-6 text-[13px] text-ash">
+                {facts.map((f) => (
+                  <div key={f.k} className="flex justify-between gap-4">
+                    <span>{f.k}</span>
+                    <span className={`text-right text-ink ${f.strong ? "font-semibold" : ""}`}>{f.v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 text-center">
+              <Link href="/long-stay" className={BTN_SECONDARY}>
+                {h.longStayLink} →
+              </Link>
+            </div>
+          </div>
+        </aside>
       </section>
 
-      {/* Final CTA — quiet, centered */}
-      <section className="bg-paper-soft">
-        <div className="mx-auto max-w-[920px] px-6 lg:px-10 py-24 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl text-ink italic leading-snug">
-            “{t.home.finalTitle}”
-          </h2>
-          <p className="mt-5 font-script text-3xl text-son">{t.home.finalSub}</p>
-          <Link
-            href="/contact"
-            className="press group inline-flex items-center gap-2 mt-8 rounded-full bg-son px-7 py-3 text-sm font-label text-paper hover:bg-son-deep"
-          >
-            {t.home.finalCta}
-            <span className="cta-arrow">→</span>
+      {/* Rooms & rates — same names, sizes, occupancy and prices as Booking.com */}
+      <section id="rooms" className="mx-auto mt-20 max-w-[1280px] scroll-mt-24 px-6 lg:px-10">
+        <h2 className="text-2xl font-bold tracking-tight">{h.roomsTitle}</h2>
+        <p className="mt-2 max-w-2xl text-[15px] text-ash">{h.roomsNote}</p>
+        <RoomsGrid onPick={setRoom} />
+        <div className="mt-8">
+          <Link href="/apartments" className={BTN_SECONDARY}>
+            {h.roomsAll} →
           </Link>
         </div>
       </section>
-    </>
+
+      <section id="location" className="mx-auto mt-20 grid max-w-[1280px] scroll-mt-24 gap-8 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+        <div className="lg:col-span-5">
+          <h2 className="text-2xl font-bold tracking-tight">{h.locationTitle}</h2>
+          <p className="mt-2 text-[15px] text-ash">{h.locationBody}</p>
+          <ul className="mt-5 divide-y divide-hairline border-y border-hairline">
+            {h.nearby.map((n) => (
+              <li key={n.k} className="flex justify-between gap-4 py-3 text-[15px]">
+                <span>{n.k}</span>
+                <span className="tabular-nums text-ash">{n.v}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={MAPS_URL} target="_blank" rel="noreferrer" className={`${BTN_SECONDARY} mt-6`}>
+            {h.locationCta} →
+          </a>
+        </div>
+        <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] border border-hairline lg:col-span-7 lg:aspect-auto lg:min-h-[420px]">
+          <iframe src={MAP_EMBED} className="absolute inset-0 h-full w-full" loading="lazy" title="Hanoi AN Residence — map" />
+        </div>
+      </section>
+
+      <section id="contact" className="mx-auto mt-20 grid max-w-[1280px] scroll-mt-24 gap-8 px-6 lg:grid-cols-12 lg:items-start lg:gap-12 lg:px-10">
+        <div className="lg:col-span-5">
+          <h2 className="text-2xl font-bold tracking-tight">{t.contact.heroTitle}</h2>
+          <p className="mt-2 text-[15px] text-ash">{t.contact.heroLead}</p>
+          <div className="mt-6 space-y-2.5 text-[15px]">
+            <a href="tel:+84905991979" className="block hover:text-son">
+              +84 905 991 979 · Zalo · WhatsApp
+            </a>
+            <a href="mailto:anresidence107h3m@gmail.com" className="block hover:text-son">
+              anresidence107h3m@gmail.com
+            </a>
+            <p className="text-ash">107 Ô Đồng Lầm, Đống Đa, Hà Nội</p>
+          </div>
+        </div>
+        <ContactForm className="lg:col-span-7" />
+      </section>
+    </article>
   );
 }

@@ -26,19 +26,17 @@ export function Footer() {
 
   return (
     <footer className="mt-24 border-t border-hairline bg-paper-soft text-ink">
-      <div className="mx-auto max-w-[1320px] px-6 py-14 lg:px-10 grid gap-10 md:grid-cols-5">
+      <div className="mx-auto max-w-[1280px] px-6 py-14 lg:px-10 grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-walnut">
             {t.footer.blurb}
           </p>
-          <p className="mt-6 font-script text-3xl text-son leading-none">
-            {t.brandTag}
-          </p>
+          <p className="mt-5 text-sm font-semibold text-son">{t.brandTag}</p>
         </div>
 
         <div>
-          <h4 className="font-label text-[11px] text-ash">{t.footer.stay}</h4>
+          <h4 className="text-sm font-bold text-ink">{t.footer.stay}</h4>
           <ul className="mt-4 space-y-3 text-sm">
             {stayLinks.map((l) => (
               <li key={l.href}>
@@ -49,7 +47,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-label text-[11px] text-ash">{t.footer.explore}</h4>
+          <h4 className="text-sm font-bold text-ink">{t.footer.explore}</h4>
           <ul className="mt-4 space-y-3 text-sm">
             {discoverLinks.map((l) => (
               <li key={l.href}>
@@ -60,7 +58,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="font-label text-[11px] text-ash">{t.footer.contact}</h4>
+          <h4 className="text-sm font-bold text-ink">{t.footer.contact}</h4>
           <ul className="mt-4 space-y-3 text-sm">
             <li className="text-walnut">107 Ô Đồng Lầm</li>
             <li className="text-walnut">Đống Đa, Hà Nội</li>
@@ -70,9 +68,9 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-hairline">
-        <div className="mx-auto max-w-[1320px] px-6 py-5 lg:px-10 flex flex-wrap items-center justify-between gap-3 text-xs text-ash">
+        <div className="mx-auto max-w-[1280px] px-6 py-5 lg:px-10 flex flex-wrap items-center justify-between gap-3 text-xs text-ash">
           <span>{t.footer.copyright}</span>
-          <span className="font-label">{t.footer.brandLine}</span>
+          <span>{t.footer.brandLine}</span>
         </div>
       </div>
     </footer>

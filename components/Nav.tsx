@@ -13,31 +13,29 @@ export function Nav() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/about", label: t.nav.about },
-    { href: "/apartments", label: t.nav.apartments },
+    { href: "/#rooms", label: t.nav.apartments },
     { href: "/gallery", label: t.nav.gallery },
-    { href: "/experiences", label: t.nav.experiences },
+    { href: "/#location", label: t.nav.location },
+    { href: "/long-stay", label: t.nav.longStay },
     { href: "/blog", label: t.nav.journal },
+    { href: "/about", label: t.nav.about },
   ];
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => !href.startsWith("/#") && pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-paper/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-6 py-4 lg:px-10">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-paper/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-6 py-2.5 lg:px-10">
         <Link href="/" aria-label="AN Residence — Home" className="flex items-center">
           <Logo />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`text-[13px] font-medium transition hover:text-son ${
-                isActive(link.href) ? "text-son" : "text-ink"
-              }`}
+              className={`text-sm font-semibold transition hover:text-ink ${isActive(link.href) ? "text-ink" : "text-ash"}`}
             >
               {link.label}
             </Link>
@@ -48,13 +46,13 @@ export function Nav() {
           <LanguageToggle />
           <Link
             href="/#book"
-            className="press hidden sm:inline-flex items-center rounded-full bg-son px-4 py-2 text-xs font-label text-paper hover:bg-son-deep"
+            className="hidden items-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-black sm:inline-flex"
           >
             {t.nav.bookNow}
           </Link>
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink md:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
           >
@@ -65,16 +63,14 @@ export function Nav() {
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-hairline bg-paper">
-          <div className="mx-auto max-w-[1320px] px-6 py-4 flex flex-col gap-3.5">
+        <div className="border-t border-hairline bg-paper md:hidden">
+          <div className="mx-auto flex max-w-[1280px] flex-col gap-3.5 px-6 py-4">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`text-sm font-medium hover:text-son ${
-                  isActive(link.href) ? "text-son" : "text-ink"
-                }`}
+                className={`text-sm font-semibold ${isActive(link.href) ? "text-ink" : "text-ash"}`}
               >
                 {link.label}
               </Link>
@@ -82,7 +78,7 @@ export function Nav() {
             <Link
               href="/#book"
               onClick={() => setOpen(false)}
-              className="press mt-1 inline-flex w-fit items-center rounded-full bg-son px-5 py-2.5 text-xs font-label text-paper"
+              className="mt-1 inline-flex w-fit items-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper"
             >
               {t.nav.bookNow}
             </Link>

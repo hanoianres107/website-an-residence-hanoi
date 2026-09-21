@@ -1,29 +1,17 @@
-export function Logo({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex items-baseline ${className}`}>
-      <span className="font-rounded logo-gradient text-[30px] font-extrabold leading-none tracking-tight">
-        AN
-      </span>
-    </div>
-  );
-}
+import Image from "next/image";
 
-export function Monogram({ className = "", size = 32 }: { className?: string; size?: number }) {
+/** Web Logo Kit — Gradient AN (21/09/2026). Kit README: 104–128 px wide on desktop headers, 80–96 px on phones. */
+export function Logo({ className = "" }: { className?: string }) {
+  // unoptimized: the kit file is already sized for the header, and the local image
+  // optimizer hangs converting this transparent PNG to WebP/AVIF (JPEG photos are fine).
   return (
-    <svg
-      viewBox="0 0 40 40"
-      width={size}
-      height={size}
-      className={className}
-      aria-hidden="true"
-    >
-      <g fill="none" stroke="currentColor" strokeWidth="1.2">
-        <path d="M20 4 C 28 12 28 12 20 20 C 12 12 12 12 20 4 Z" />
-        <path d="M20 20 C 28 28 28 28 20 36 C 12 28 12 28 20 20 Z" />
-        <path d="M20 4 C 12 12 12 12 4 20 C 12 28 12 28 20 20 Z" />
-        <path d="M20 4 C 28 12 28 12 36 20 C 28 28 28 28 20 20 Z" />
-        <circle cx="20" cy="20" r="1.4" fill="currentColor" />
-      </g>
-    </svg>
+    <Image
+      src="/brand/an-logo-gradient-256.png"
+      alt="AN Residence"
+      width={256}
+      height={151}
+      unoptimized
+      className={`h-auto w-20 sm:w-[104px] ${className}`}
+    />
   );
 }
