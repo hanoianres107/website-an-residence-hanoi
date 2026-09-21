@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { APARTMENTS } from "@/lib/apartments";
-
-const SITE_URL = "https://anresidencehanoi.com";
+import { POSTS } from "@/lib/blog";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -19,8 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
   ];
 
-  const blogSlugs = ["son-mai-ha-thai", "buoi-sang-ho-ba-mau", "o-dai-ngay-tai-an"];
-
   return [
     ...staticRoutes.map((path) => ({
       url: `${SITE_URL}${path}`,
@@ -32,10 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    ...blogSlugs.map((slug) => ({
-      url: `${SITE_URL}/blog/${slug}`,
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
+    ...POSTS.map((p) => ({
+      url: `${SITE_URL}/blog/${p.slug}`,
+      lastModified: p.date,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      alternates: { languages: { [p.lang]: `${SITE_URL}/blog/${p.slug}`, [p.lang === "en" ? "vi" : "en"]: `${SITE_URL}/blog/${p.pair}` } },
     })),
   ];
 }

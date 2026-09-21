@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/lib/lang";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ContactDock } from "@/components/ContactDock";
+import { SITE_URL } from "@/lib/site";
 
 // One sans for the whole site, as on the Eden page (catbaoutdoors.vn) — with the Vietnamese subset
 const inter = Inter({
@@ -14,7 +15,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://anresidencehanoi.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -3,61 +3,48 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLang } from "@/lib/lang";
-import { SectionLabel } from "@/components/SectionLabel";
+import { postsIn, readMinutes, formatDate } from "@/lib/blog";
 
 export default function BlogPage() {
-  const { t } = useLang();
-  const posts = t.blog.posts;
+  const { lang, t } = useLang();
+  const posts = postsIn(lang);
 
   return (
-    <>
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 pt-16 pb-10">
-          <SectionLabel>{t.blog.heroEyebrow}</SectionLabel>
-          <h1 className="mt-4 font-display text-5xl sm:text-6xl text-ink leading-[1.05] max-w-3xl">
-            {t.blog.heroTitle}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-walnut leading-relaxed">{t.blog.heroLead}</p>
-        </div>
-      </section>
+    <section className="mx-auto max-w-[1280px] px-6 pt-12 lg:px-10">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-son sm:text-sm">{t.blog.heroEyebrow}</p>
+      <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{t.blog.heroTitle}</h1>
+      <p className="mt-2 max-w-2xl text-[15px] text-ash">{t.blog.heroLead}</p>
 
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1320px] px-6 lg:px-10 pb-20">
-          <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                  <Image
-                    src={post.cover}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
-                  />
-                  <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-paper/90 px-3 py-1 font-label text-[10px] text-son backdrop-blur">
-                    {post.category}
-                  </span>
-                </div>
-                <div className="mt-4">
-                  <div className="flex items-center gap-2 text-xs text-ash">
-                    <span>{post.date}</span>
-                    <span>·</span>
-                    <span>{post.readMins} {t.blog.minRead}</span>
-                  </div>
-                  <h2 className="mt-2 font-display text-2xl text-ink leading-snug group-hover:text-son transition">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-walnut">{post.excerpt}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-label text-son">
-                    {t.blog.readMore}
-                    <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p, i) => (
+          <Link
+            key={p.slug}
+            href={`/blog/${p.slug}`}
+            className="group flex flex-col overflow-hidden rounded-[16px] border border-hairline bg-paper transition-colors hover:border-ink"
+          >
+            <div className="relative aspect-[16/9] bg-paper-soft">
+              <Image
+                src={p.cover.src}
+                alt={p.cover.alt}
+                fill
+                loading={i < 3 ? "eager" : "lazy"}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <p className="text-xs text-ash">
+                {formatDate(p.date, lang)} · {readMinutes(p)} {t.blog.minRead}
+              </p>
+              <h2 className="mt-2 text-lg font-bold leading-snug tracking-tight">{p.title}</h2>
+              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ash">{p.description}</p>
+              <span className="mt-auto pt-4 text-sm font-semibold text-ink">
+                {t.blog.readMore} <span className="cta-arrow">→</span>
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }

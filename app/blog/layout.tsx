@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "The AN Journal — Craft, Neighbourhood & Stays",
+  title: "Hanoi Journal — Seasons, Festivals & Slow Stays",
   description:
-    "Stories from AN Residence — Vietnamese lacquer craft, mornings by Ba Mau Lake, and what it's like to live a month in Hanoi.",
+    "Local guides to Hanoi's autumn festivals, seasonal food, November weather and quieter stays by Ba Mau Lake, from Hanoi AN Residence.",
   alternates: { canonical: "/blog" },
 };
 
